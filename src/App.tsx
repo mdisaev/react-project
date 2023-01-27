@@ -1,61 +1,17 @@
-import React from 'react';
-import { Timer } from './components/Timer';
-import { Input } from './components/Input';
+import { getRandomMatrix, getRandomNumber, getRandomArrayElement,getRandomDate } from './utils/random';
 
 function App() {
 
-  return <div style={{'display': 'flex', flexDirection: 'column'}}>
-    <div style={{'display': 'flex', justifyContent: 'space-around'}}>
-      <div>
-    <Input inputId={'input-1'} inputProcess={processInput} />
-    </div>
-        <Timer inputId={'input-1'}></Timer>
-        <Timer cityOrCountry={'Moldova'}></Timer>
-     </div>
-     <div style={{'display': 'flex', justifyContent: 'space-around'}}>
-        <Timer cityOrCountry={'Montenegro'}></Timer>
-        <Timer cityOrCountry={'Paris'}></Timer>
-      </div>
-     
-   </div>
+console.log(getRandomNumber(1,4, false, false))
+console.log(getRandomNumber(8,3, true, false))
+console.log(getRandomMatrix(10,5,1,10))
+console.log(getRandomArrayElement([1,2,3,5,1000, "abc", "ccCAGE"]))
+console.log(getRandomDate(1990,2005))
+
+  return <div></div>
 
 }
 
-function processInput(value: string): string {
-      let res: string = '';
-      if(value.toLowerCase().includes("hello")) {
-          res = "get tired from HELLO. It's forbidden word";
-      }
-      return res;
-    }
-
-
-// function App() {
-//   function processInput(value: string): string {
-//     let res: string = '';
-//     if(value.toLowerCase().includes("hello")) {
-//         res = "get tired from HELLO. It's forbidden word";
-//     }
-//     return res;
-    
-//   }
-//   return <Input inputId={'input-1'} inputProcess={processInput} />
-
-// }
-
 export default App;
 
-
-// function App() {
-//   function processInput(value: string): string {
-//     let res: string = '';
-//     if(value.toLowerCase().includes("hello")) {
-//         res = "get tired from HELLO. It's forbidden word";
-//     }
-//     return res;
-    
-//   }
-//   return <Input inputId={'input-1'} inputProcess={processInput} />
-
-// }
 
