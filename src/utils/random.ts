@@ -1,64 +1,39 @@
-export function getRandomNumber(min: number, max: number, isMinInclusive: boolean = true,
-    isMaxInclusive: boolean = false): number {
-
-    if (min > max) {
-        let temp: number;
-        temp = min;
-        min = max;
-        max = temp;
-    }
-
-    if (max == min && (!isMaxInclusive || !isMinInclusive)) {
-        throw new Error('min may not be equaled to max!')
-    }
-
-    let a: number = 0;
-
-    if (isMaxInclusive && !isMinInclusive) {
-        a = Math.floor(Math.random() * (max - min) + min + 1)
-    }
-    else if ((isMinInclusive) && !isMaxInclusive) {
-        a = Math.floor(Math.random() * (max - min) + min)
-    }
-    else if (isMaxInclusive && isMinInclusive) {
-        a = Math.floor(Math.random() * (max + 1 - min) + min)
-    }
-    else if (!isMaxInclusive && !isMinInclusive) {
-        a = Math.floor(Math.random() * (max - 1 - min) + min + 1)
-    }
-
-    return a;
-
+export function getRandomNumber(min: number, max: number,
+     isMinInclusive: boolean = true, isMaxInclusive: boolean = false) {
+        if (!isMinInclusive) {
+            min++;
+        }
+        if (isMaxInclusive) {
+            max++;
+        }
+        if (min == max) {
+            throw "min may not be equaled to max";
+        }
+        if (min > max) {
+            [min, max] = [max, min];
+        }
+        return min + Math.trunc(Math.random() * (max - min));
+        
 }
-
-export function getRandomMatrix(rows: number, columns: number, min: number, max
-    : number): number[][] {
-
-    let arrayOfRows: number[] = [];
-    for (let i = 0; i <= rows; i++) {
-        arrayOfRows.push(Math.floor(Math.random() * (max - min) + min))
-    }
-
-    let arrayOfColumns: number[] = [];
-    for (let i = 0; i <= columns; i++) {
-        arrayOfColumns.push(Math.floor(Math.random() * (max - min) + min))
-    }
-
-    let randomMatrix: number[][] = [];
-    randomMatrix.push(arrayOfColumns, arrayOfRows)
-
-    return randomMatrix;
+export function getElement<T>(array: T[]): T {
+    return array[getRandomNumber(0, array.length)];
+    
 }
-
-export function getRandomArrayElement(array: any[]): any {
-
-    return array[Math.floor(Math.random() * array.length)]
+export function getRandomMatrix(rows: number, columns: number, min: number,
+     max: number): number[][] {
+    const resMatrix: number[][] = [];
+    for (let i = 0; i < rows; i++) {
+        resMatrix[i] = [];
+        for (let j = 0; j < columns; j++) {
+            resMatrix[i][j] = getRandomNumber(min, max, true, true);
+        }
+    }
+    return resMatrix;
 }
-
 export function getRandomDate(minYear: number, maxYear: number): Date {
-
-    return new Date((Math.random() * (maxYear - minYear) + minYear), Math.floor(Math.random() * 12), (Math.floor(Math.random() * 31)))
+    const year = getRandomNumber(minYear, maxYear);
+    const month = getRandomNumber(0, 12);
+    const day = getRandomNumber(1, 32);
+    const dateRes = new Date(year, month, day);
+    return dateRes;
 }
-
-
-
