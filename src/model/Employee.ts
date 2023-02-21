@@ -5,3 +5,4 @@ export type Employee = {
     department: string;
     salary: number;
 }
+//*1
